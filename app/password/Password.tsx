@@ -13,10 +13,12 @@ const Password: React.FC = () => {
 
     if (password === 'fedev2024test') {
       // Set password cookie
-      document.cookie = `password=${password}; path=/; max-age=86400` // 1 day
+      document.cookie = `password=${password}; path=/; max-age=86400; Secure; SameSite=Strict` // 1 day
+      console.log('Password set, redirecting...')
       router.push('/') // Redirect to home page
     } else {
       setError(true)
+      setPassword('') // Clear the input for better UX
     }
   }
 
@@ -35,7 +37,9 @@ const Password: React.FC = () => {
           className="w-full bg-dark px-4 py-2 border rounded mb-4"
         />
         {error && (
-          <p className="text-red-500 text-sm mb-4">Incorrect password.</p>
+          <p className="text-red-500 text-sm mb-4">
+            Incorrect password. Try again.
+          </p>
         )}
         <button
           type="submit"
