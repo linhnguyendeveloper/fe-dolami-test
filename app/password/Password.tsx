@@ -1,12 +1,10 @@
 'use client'
 
 import { useState } from 'react'
-import { useRouter } from 'next/navigation'
 
 const Password: React.FC = () => {
   const [password, setPassword] = useState('')
   const [error, setError] = useState(false)
-  const router = useRouter()
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -15,7 +13,7 @@ const Password: React.FC = () => {
       // Set password cookie
       document.cookie = `password=${password}; path=/; max-age=86400; Secure; SameSite=Strict` // 1 day
       console.log('Password set, redirecting...')
-      router.push('/') // Redirect to home page
+      window.location.reload()
     } else {
       setError(true)
       setPassword('') // Clear the input for better UX
